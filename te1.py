@@ -22,7 +22,7 @@ def get_model_data(path):
     learn = cnn_learner(data, models.resnet50, metrics = [accuracy], pretrained=True)
     learn = learn.to_fp16()
 
-    learn.load('/home/pete/shot/2/models/mymodel2');
+    learn.load('/home/pete/shot/2/models/mymodel2'); #here is model data for nn
 
     return learn, data    
 
@@ -53,7 +53,8 @@ def get_tfms(): return get_transforms(do_flip = True,
                                       xtra_tfms = xtra_tfms())
 
 path = Path('/home/pete/shot/2/')
-path_img = '/home/pete/face/scene2/'
+
+path_img = '/home/pete/face/scene2/' # here put images for recognition
 tests = [f for f in os.listdir(path_img) if f.endswith(('.JPG', '.jpeg', '.PNG'))]
 
 os.chdir(path_img)
@@ -66,7 +67,7 @@ learn = learn.to_fp32()
 
 
 os.chdir(path_img)
-for file in tests[:33]:
+for file in tests[:33]: #shows 33 first files, change on memory usage
     img = open_image(file)
     img.show(figsize = (6, 8), title = str(learn.predict(img)[0]))
     
